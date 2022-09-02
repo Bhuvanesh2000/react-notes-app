@@ -1,13 +1,38 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    @apply p-0;
+    @apply m-0;
+    @apply box-border;
+    @apply tracking-wide;
+}
+
+body,
+pre {
+    font-family: "Dancing Script", cursive;
+    @apply font-semibold;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+::-webkit-scrollbar {
+    @apply w-1;
+    @apply h-1;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply rounded-full;
+    @apply bg-gray-400;
+}
+
+ ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
 }

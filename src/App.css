@@ -1,0 +1,124 @@
+.App {
+    @apply min-h-screen;
+    @apply w-screen;
+    @apply text-xl;
+    @apply p-5;
+    @apply relative;
+}
+
+.button-style {
+    @apply relative;
+    @apply rounded-md;
+    @apply flex;
+    @apply items-center;
+    @apply p-2;
+    @apply border;
+}
+
+.button-style::before {
+    @apply content-[''];
+    @apply h-1.5;
+    @apply w-1/2;
+    @apply top-0;
+    @apply left-1.5;
+    @apply absolute;
+    transform: skew(20deg);
+}
+
+.button-style::after {
+    @apply content-[''];
+    @apply h-1.5;
+    @apply w-1/2;
+    @apply right-1.5;
+    @apply bottom-0;
+    @apply absolute;
+    transform: skew(20deg);
+}
+
+
+/*  */
+
+.button-style-green {
+    @apply border-green-500;
+}
+
+.button-style-green:before,
+.button-style-green:after {
+    @apply bg-green-500;
+}
+
+
+/*  */
+
+.button-style-blue {
+    @apply border-blue-500;
+}
+
+.button-style-blue:before,
+.button-style-blue:after {
+    @apply bg-blue-500;
+}
+
+
+/*  */
+
+.button-style-gray {
+    @apply border-gray-500;
+}
+
+.button-style-gray:before,
+.button-style-gray:after {
+    @apply bg-gray-500;
+}
+
+
+/*  */
+
+.button-style-purple {
+    @apply border-purple-500;
+}
+
+.button-style-purple:before,
+.button-style-purple:after {
+    @apply bg-purple-500;
+}
+
+
+/*  */
+
+.button-style-red {
+    @apply border-red-500;
+}
+
+.button-style-red:before,
+.button-style-red:after {
+    @apply bg-red-500;
+}
+
+.popup-style {
+    @apply flex;
+    @apply flex-col;
+    @apply items-center;
+    @apply rounded-md;
+    @apply min-w-xs;
+    @apply p-4;
+    @apply fixed;
+    @apply top-1/2;
+    @apply left-1/2;
+    @apply -translate-x-1/2;
+    @apply -translate-y-1/2;
+    @apply justify-center;
+    @apply bg-white;
+    @apply z-10
+}
+
+.disable-bg {
+    @apply absolute;
+    @apply top-0;
+    @apply left-0;
+    @apply w-screen;
+    @apply h-screen;
+    @apply overflow-hidden;
+    @apply bg-gray-500;
+    @apply bg-opacity-30;
+}
