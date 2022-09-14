@@ -5,8 +5,8 @@ function App() {
   const [notesList, setNotesList] = useState([]);
   const [editKey, setEditKey] = useState(-1);
   const [noteValue, setNoteValue] = useState("");
-  const [create, setCreate] = useState(false);
-  const [search, setSearch] = useState("");
+  const [isCreate, setIsCreate] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const [searchList, setSearchList] = useState([]);
   const [deleteKey, setDeleteKey] = useState(-1);
 
@@ -17,8 +17,8 @@ function App() {
   deletePopupRefs.current = notesList.map((note, key) => deletePopupRefs.current[key] ?? createRef());
 
   useEffect(() => {
-    setSearchList(notesList.filter((val) => val.toLowerCase().includes(search.toLowerCase())))
-  }, [search])
+    setSearchList(notesList.filter((val) => val.toLowerCase().includes(searchValue.toLowerCase())))
+  }, [searchValue])
 
   useEffect(() => {
     addFocusEvent(deleteKey);
@@ -55,7 +55,7 @@ function App() {
         setNotesList(notesList.map((val, ind) => ind === index ? value : val))
       } else {
         setNotesList([...notesList, value]);
-        setCreate((prevVal) => !prevVal);
+        setIsCreate((prevVal) => !prevVal);
       }
       setNoteValue("");
     }
@@ -66,17 +66,17 @@ function App() {
     switch (eName) {
       case "edit":
         setEditKey(index);
-        setCreate(false);
+        setIsCreate(false);
         break;
       case "confirm_delete":
         setDeleteKey(index);
         addFocusEvent();
         break;
       case "create":
-        setCreate((prevVal) => !prevVal);
+        setIsCreate((prevVal) => !prevVal);
         break;
       case "close":
-        setCreate(false);
+        setIsCreate(false);
         break;
       case "cancel_delete":
         setDeleteKey(-1);
@@ -103,12 +103,12 @@ function App() {
     }
   }
 
-  function handleChangeEvent(e) {
+  const handleChangeEvent = (e) => {
     const eName = e.currentTarget.getAttribute("name");
     const eValue = e.currentTarget.value;
     switch (eName) {
       case "search":
-        setSearch(eValue);
+        setSearchValue(eValue);
         break;
       case "note":
         setNoteValue(eValue);
@@ -118,7 +118,7 @@ function App() {
     }
   }
 
-  function handleBlurEvent(e) {
+  const handleBlurEvent = (e) => {
     const eName = e.currentTarget.getAttribute("name");
     if (eName === "delete_popup") {
       addClickEvent("cancel_delete");
@@ -176,13 +176,13 @@ function App() {
 
         {notesList.length > 0 && <div className="button-style button-style-gray mb-2"><input type="text" placeholder="Search a note..." onChange={handleChangeEvent} name="search" className="rounded-md align-top w-full outline-none px-2 bg-transparent" /></div>}
 
-        {create ?
+        {isCreate ?
           <form action="#" onSubmit={handleSubmitEvent} className="flex flex-col">
             <div className="button-style button-style-gray">
               <textarea onChange={handleChangeEvent} value={noteValue} placeholder="Enter a note..." name="note" rows={5} className="scrollbar-gray align-top w-full p-2 rounded-md resize-none outline-none bg-transparent" autoFocus></textarea>
             </div>
             <div className="flex w-full justify-between mt-2">
-              <button type="submit" name="add_note" className="button-style button-style-green">
+              <button name="add_note" className="button-style button-style-green">
                 <i class="material-symbols-outlined mr-1">done</i>
                 Add Note
               </button>
@@ -192,14 +192,14 @@ function App() {
               </button>
             </div>
           </form> :
-          <button onClick={handleClickEvent} name="create" className="button-style button-style-blue" style={{}}>
+          <button onClick={handleClickEvent} name="create" className="button-style button-style-blue">
             <i class="material-symbols-outlined mr-1">add_box</i>
             Create Note
           </button>
         }
 
         <ul>
-          {search === "" ? <DisplayNotes notesList={notesList} /> : <DisplayNotes notesList={searchList} />}
+          {searchValue === "" ? <DisplayNotes notesList={notesList} /> : <DisplayNotes notesList={searchList} />}
         </ul>
       </div>
     </div>
